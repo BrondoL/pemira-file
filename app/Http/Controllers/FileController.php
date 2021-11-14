@@ -23,9 +23,8 @@ class FileController extends Controller
         $oldName = $request->oldname;
         $filename = $request->file("file")->getClientOriginalName();
         $folder = 'files/' . $request->folder;
-        $path = $folder . '/' . $oldName;
-        if (file_exists($path)) {
-            unlink($path);
+        if (file_exists($oldName)) {
+            unlink($oldName);
         }
         $request->file('file')->move($folder, $filename);
         return response()->json([
@@ -38,10 +37,8 @@ class FileController extends Controller
     public function destroy(Request $request)
     {
         $filename = $request->filename;
-        $folder = 'files/' . $request->folder;
-        $path = $folder . '/' . $filename;
-        if (file_exists($path)) {
-            unlink($path);
+        if (file_exists($filename)) {
+            unlink($filename);
             return response()->json([
                 'success' => true,
                 'message' => "Berhasil menghapus file!",

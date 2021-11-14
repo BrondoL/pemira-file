@@ -15,7 +15,7 @@ class ApiKeyMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if ($request->key != "pemiraunila2021") {
+        if ($request->key != env("API_KEY")) {
             return response()->json([
                 'success' => false,
                 'message' => 'Unauthorized!',
